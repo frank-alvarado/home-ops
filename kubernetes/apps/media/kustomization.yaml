@@ -17,6 +17,7 @@ resources:
   - ./tautulli/ks.yaml
   - ./lidarr/ks.yaml
   - ./prowlarr/ks.yaml
+  - ./theme-park/ks.yaml
   # - ./unpackerr/ks.yaml
 
   # - ./animarr/ks.yaml
