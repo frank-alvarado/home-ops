@@ -1,0 +1,98 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: &app lidarr
+  namespace: media
+spec:
+  interval: 15m
+  dependsOn:
+    - name: longhorn
+      namespace: longhorn-system
+  chart:
+    spec:
+      version: 1.5.1
+      chart: app-template
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    remediation:
+      retries: 5
+  values:
+    controller:
+      strategy: RollingUpdate
+    image:
+      image:
+      repository: ghcr.io/onedr0p/lidarr
+      tag: 1.1.4.3027@sha256:89670e9ad9b02d5157197295b57bb5530a8947de283676314214cdc322f347a6
+    env:
+      TZ: "${TIMEZONE}"
+      PUID: 0
+      PGID: 0
+    envFrom:
+      - secretRef:
+          name: *app
+    service:
+      main:
+        ports:
+          http:
+            port: 8686
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: nginx
+        annotations:
+          cert-manager.io/cluster-issuer: "letsencrypt-production"
+          external-dns.alpha.kubernetes.io/target: "ingress.${SECRET_DOMAIN}"
+          hajimari.io/icon: "music-box"
+        hosts:
+          - host: &host-release "{{ .Release.Name }}.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+          - host: &host-custom "lidarr.${SECRET_DOMAIN}"
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - hosts:
+              - *host-release
+              - *host-custom
+    securityContext:
+      seLinuxOptions:
+        level: s0
+    podSecurityContext:
+      runAsUser: 568
+      runAsGroup: 568
+      fsGroup: 568
+      fsGroupChangePolicy: "OnRootMismatch"
+    persistence:
+      config:
+        enabled: true
+        existingClaim: lidarr-config-v1
+      nfs-nas-media:
+        enabled: true
+        existingClaim: media-nfs-share-pvc
+        mountPath: /data/media
+        readOnly: false
+      # backup:
+      #   enabled: true
+      #   type: nfs
+      #   server: "expanse.${SECRET_PRIVATE_DOMAIN}"
+      #   path: /tycho/Apps/External/Backups/lidarr
+      #   mountPath: /config/Backups
+      #   readOnly: false
+    resources:
+      requests:
+        memory: 12Mi
+        cpu: 10m
+      limits:
+        memory: 512Mi
+        cpu: 100m
