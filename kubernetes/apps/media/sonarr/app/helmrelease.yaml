@@ -38,9 +38,6 @@ spec:
       SONARR__BRANCH: develop
       SONARR__APPLICATION_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
       SONARR__LOG_LEVEL: info
-      DOCKER_MODS: ghcr.io/gilbn/theme.park:sonarr
-      TP_DOMAIN: theme-park.frankalv.com
-      TP_THEME: hotline
     envFrom:
       - secretRef:
           name: *app
