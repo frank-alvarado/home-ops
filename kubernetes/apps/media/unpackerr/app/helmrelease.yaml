@@ -30,7 +30,7 @@ spec:
         reloader.stakater.com/auto: "true"
     image:
       repository: ghcr.io/onedr0p/unpackerr
-      tag: 0.11.2@sha256:9781814f461b08b44be372b50f7797e951f6d832e5f98e795ba364136eb688ad
+      tag: rolling@sha256:9781814f461b08b44be372b50f7797e951f6d832e5f98e795ba364136eb688ad
     env:
       TZ: "${TIMEZONE}"
       UN_WEBSERVER_METRICS: "true"
