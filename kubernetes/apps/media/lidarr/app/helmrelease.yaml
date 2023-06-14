@@ -31,7 +31,7 @@ spec:
     image:
       image:
       repository: ghcr.io/onedr0p/lidarr
-      tag: 1.1.4.3027@sha256:89670e9ad9b02d5157197295b57bb5530a8947de283676314214cdc322f347a6
+      tag: rolling@sha256:89670e9ad9b02d5157197295b57bb5530a8947de283676314214cdc322f347a6
     env:
       TZ: "${TIMEZONE}"
       PUID: 0
