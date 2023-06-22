@@ -7,7 +7,6 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./media-nfs-share.yaml
-  - ./media-nfs-share-complete.yaml
   - ./sabnzbd/ks.yaml
   - ./overseerr/ks.yaml
   - ./radarr/ks.yaml
@@ -17,9 +16,5 @@ resources:
   - ./tautulli/ks.yaml
   - ./lidarr/ks.yaml
   - ./prowlarr/ks.yaml
-  - ./theme-park/ks.yaml
-  # - ./unpackerr/ks.yaml
 
   # - ./animarr/ks.yaml
-
-  # - ./plex/ks.yaml
