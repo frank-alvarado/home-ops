@@ -1,0 +1,11 @@
+---
+creation_rules:
+  - path_regex: kubernetes/.*\.sops\.ya?ml
+    encrypted_regex: "^(data|stringData)$"
+    key_groups:
+      - age:
+          - "age1qp9m08g8trwxn5a40c2p8dnweem68djtdzukg2q4tfy5qlun7pwshxjuxw"
+  - path_regex: ansible/.*\.sops\.ya?ml
+    key_groups:
+      - age:
+          - "age1qp9m08g8trwxn5a40c2p8dnweem68djtdzukg2q4tfy5qlun7pwshxjuxw"

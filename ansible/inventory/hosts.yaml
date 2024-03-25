@@ -1,0 +1,34 @@
+---
+kubernetes:
+  children:
+    controllers:
+      hosts:
+        "l1-d1":
+          ansible_user: "frank"
+          ansible_host: "192.168.1.231"
+        "l2-d1":
+          ansible_user: "frank"
+          ansible_host: "192.168.1.147"
+        "frankpro-d1":
+          ansible_user: "frank"
+          ansible_host: "192.168.1.223"
+    workers:
+      hosts:
+        "frankpro-d2":
+          ansible_user: "frank"
+          ansible_host: "192.168.1.94"
+        "l2-d2":
+          ansible_user: "frank"
+          ansible_host: "192.168.1.106"
+        "nuc1":
+          ansible_user: "frank"
+          ansible_host: "192.168.1.79"
+        "nuc2":
+          ansible_user: "frank"
+          ansible_host: "192.168.1.148"
+        "nuc3":
+          ansible_user: "frank"
+          ansible_host: "192.168.1.194"
+        "nuc4":
+          ansible_user: "frank"
+          ansible_host: "192.168.1.188"
