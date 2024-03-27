@@ -1,13 +1,14 @@
 ---
 - Home:
     - HomeAssistant:
-        href: https://hass.${SECRET_INTERNAL_DOMAIN}
-        icon: home-assistant.png
-        description: Home Assistant
+        href: http://192.168.1.165:8581
+        icon: homebridge.png
+        description: Homebridge
         widget:
-          type: homeassistant
-          url: https://hass.${SECRET_INTERNAL_DOMAIN}
-          key: "{{HOMEPAGE_VAR_HASS_TOKEN}}"
+          type: homebridge
+          url: http://192.168.1.165:8581
+          username: frank
+          password: frank182
 - Infrastructure:
     - Cloudflared:
         href: https://dash.cloudflare.com
