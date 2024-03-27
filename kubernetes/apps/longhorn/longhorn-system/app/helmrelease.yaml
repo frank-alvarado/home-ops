@@ -38,10 +38,10 @@ spec:
         gethomepage.dev/name: Longhorn
         gethomepage.dev/group: Storage
 
-resources:
-  requests:
-    cpu: "100m"
-    memory: "50Mi"
-  limits:
-    cpu: "250m"
-    memory: "500Mi"
+# resources:
+#   requests:
+#     cpu: "100m"
+#     memory: "50Mi"
+#   limits:
+#     cpu: "250m"
+#     memory: "500Mi"
