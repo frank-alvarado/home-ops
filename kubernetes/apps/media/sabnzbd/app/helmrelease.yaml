@@ -1,9 +1,10 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
-  name: sabnzbd
+  name: &app sabnzbd
+  namespace: media
 spec:
   interval: 30m
   chart:
@@ -14,7 +15,9 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+  maxHistory: 2
   install:
+    createNamespace: true
     remediation:
       retries: 3
   upgrade:
@@ -28,9 +31,9 @@ spec:
       namespace: longhorn-system
   values:
     controllers:
-      main:
+      sabnzbd:
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/onedr0p/sabnzbd
               tag: 4.2.3
@@ -45,30 +48,20 @@ spec:
                 sabnzbd.default.svc.cluster.local,
                 sab.${SECRET_DOMAIN},
                 sabnzbd.${SECRET_DOMAIN}
-            # probes:
-            #   liveness: &probes
-            #     enabled: true
-            #     custom: true
-            #     spec:
-            #       httpGet:
-            #         path: /api?mode=version
-            #         port: *port
-            #       initialDelaySeconds: 0
-            #       periodSeconds: 10
-            #       timeoutSeconds: 1
-            #       failureThreshold: 3
-            #   readiness: *probes
-            #   startup:
-            #     enabled: false
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
             resources:
               requests:
-                cpu: 100m
+                cpu: 247m
               limits:
                 memory: 8Gi
+            probes:
+              liveness: &probes
+                enabled: true
+                custom: true
+              startup:
+                enabled: false
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
         pod:
           securityContext:
             runAsUser: 568
@@ -77,14 +70,15 @@ spec:
             fsGroup: 568
             fsGroupChangePolicy: "OnRootMismatch"
             supplementalGroups:
-              - 100
+              - 65539
     service:
-      main:
+      app:
+        controller: *app
         ports:
           http:
             port: *port
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         annotations:
@@ -97,39 +91,47 @@ spec:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
+                pathType: Prefix
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
-          - hosts:
-              - *host
+          - hosts: [*host]
     persistence:
       config:
         enabled: true
         existingClaim: sabnzbd-config-v1
       downloads:
         enabled: true
-        type: nfs
-        server: "192.168.1.119"
-        path: /volume1/video/sabnzbd/downloads
-        mountPath: /downloads
-        readOnly: false
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "192.168.1.119"
+            path: /volume1/video/sabnzbd/downloads
+        globalMounts:
+          - path: /downloads
+            readOnly: false
       temporary:
         enabled: true
-        type: nfs
-        server: "192.168.1.119"
-        path: /volume1/video/sabnzbd/temporary
-        mountPath: /incomplete-downloads
-        readOnly: false
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "192.168.1.119"
+            path: /volume1/video/sabnzbd/temporary
+        globalMounts:
+          - path: /incomplete-downloads
+            readOnly: false
       tmp:
         type: emptyDir
       nfs-nas-media:
-        type: nfs
-        server: "192.168.1.119"
-        path: /volume1/video
-        enabled: true
-        readOnly: false
-        mountPath: /nfs-nas-media
+        type: custom
+        volumeSpec:
+          nfs:
+            server: "192.168.1.119"
+            path: /volume1/video
+        globalMounts:
+          - path: /nfs-nas-media
+            readOnly: false
     resources:
       requests:
         cpu: 10m
