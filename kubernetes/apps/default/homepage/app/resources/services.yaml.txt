@@ -8,7 +8,7 @@
           type: homebridge
           url: http://192.168.1.165:8581
           username: frank
-          password: frank182
+          password: {{HOMEPAGE_VAR_HOMEBRIDGE_PASSWORD}}
 - Infrastructure:
     - Cloudflared:
         href: https://dash.cloudflare.com
