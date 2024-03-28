@@ -114,7 +114,7 @@ spec:
         enabled: true
         existingClaim: media-nfs-share-pvc
         globalMounts:
-          - /data/media
+          - path: /data/media
     resources:
       requests:
         cpu: 10m
