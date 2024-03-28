@@ -108,7 +108,7 @@ spec:
         enabled: true
         existingClaim: media-nfs-share-pvc
         globalMounts:
-          - path: /data/media
+          - path: /nfs-nas-media
             readOnly: false
     resources:
       requests:

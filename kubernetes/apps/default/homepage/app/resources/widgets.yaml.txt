@@ -22,10 +22,8 @@
       showLabel: true
 - openmeteo:
     label: Home
-    latitude: ${LATITUDE}
-    longitude: ${LONGITUDE}
-    timezone: America/Toronto
-    units: metric
+    timezone: America/Chicago
+    units: imperial
     cache: 5
 - datetime:
     text_size: l
