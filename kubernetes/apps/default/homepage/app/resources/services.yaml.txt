@@ -21,13 +21,13 @@
           key: "{{HOMEPAGE_VAR_CLOUDFLARED_API_TOKEN}}"
 - Media:
         - Overseerr:
-            icon: ombi.png
-            href: https://overseerr.${HOMEPAGE_VAR_DOMAIN}
+            icon: overseerr.png
+            href: https://overseerr.${{HOMEPAGE_VAR_DOMAIN}}
             description: Media Requests
             widget:
               type: overseerr
-              url: https://overseerr.${HOMEPAGE_VAR_DOMAIN}
-              key: {{HOMEPAGE_VAR_OVERSEERR_KEY}}
+              url: https://overseerr.${{HOMEPAGE_VAR_DOMAIN}}
+              key: "{{HOMEPAGE_VAR_OVERSEERR_KEY}}"
         - SABnzbd:
             icon: sabnzbd.png
             href: https://sabnzbd.frankalv.com
@@ -44,35 +44,36 @@
               type: radarr
               url: https://radarr.frankalv.com
               key: "{{HOMEPAGE_VAR_RADARR_KEY}}"
+              enableQueue: true
         - Sonarr:
             icon: sonarr.png
             href: https://sonarr.frankalv.com
             description: TV Shows Management
             widget:
               type: sonarr
-              url: https://sonarr.${HOMEPAGE_VAR_DOMAIN}
+              url: https://sonarr.${{HOMEPAGE_VAR_DOMAIN}}
               key: "{{HOMEPAGE_VAR_SONARR_KEY}}"
         - Lidarr:
             icon: lidarr.png
-            href: https://lidarr.${HOMEPAGE_VAR_DOMAIN}
+            href: https://lidarr.${{HOMEPAGE_VAR_DOMAIN}}
             description: Musics Management
             widget:
               type: lidarr
-              url: https://lidarr.${HOMEPAGE_VAR_DOMAIN}
-              key: {{HOMEPAGE_VAR_LIDARR_KEY}}
+              url: https://lidarr.${{HOMEPAGE_VAR_DOMAIN}}
+              key: "{{HOMEPAGE_VAR_LIDARR_KEY}}"
         - Bazarr:
             icon: bazarr.png
-            href: https://bazarr.${HOMEPAGE_VAR_DOMAIN}
+            href: https://bazarr.${{HOMEPAGE_VAR_DOMAIN}}
             description: Subtitles Management
             widget:
               type: bazarr
-              url: https://bazarr.${HOMEPAGE_VAR_DOMAIN}
-              key: {{HOMEPAGE_VAR_BAZARR_KEY}}
+              url: https://bazarr.${{HOMEPAGE_VAR_DOMAIN}}
+              key: "{{HOMEPAGE_VAR_BAZARR_KEY}}"
         - Prowlarr:
           icon: prowlarr.png
-          href: https://prowlarr.${HOMEPAGE_VAR_DOMAIN}
+          href: https://prowlarr.${{HOMEPAGE_VAR_DOMAIN}}
           description: Indexer Management
           widget:
             type: prowlarr
-            url: https://prowlarr.${HOMEPAGE_VAR_DOMAIN}
-            key: {{HOMEPAGE_VAR_PROWLARR_KEY}}
+            url: https://prowlarr.${{HOMEPAGE_VAR_DOMAIN}}
+            key: "{{HOMEPAGE_VAR_PROWLARR_KEY}}"
