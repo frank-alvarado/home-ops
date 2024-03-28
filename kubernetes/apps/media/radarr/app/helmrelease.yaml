@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/helm.toolkit.fluxcd.io/helmrelease_v2beta2.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 2.6.0
+      version: 3.0.4
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -28,15 +28,24 @@ spec:
       namespace: longhorn-system
   values:
     controllers:
-      main:
+      radarr:
+        type: deployment
+      #   initContainers:
+      #     init:
+      #       image:
+      #         repository: ghcr.io/onedr0p/postgres-init
+      #         tag: 16.2
+      #         pullPolicy: IfNotPresent
+      #       envFrom: &envFrom
+      #         - secretRef:
+      #             name: postgres-radarr
         containers:
-          main:
+          app:
             image:
               repository: ghcr.io/onedr0p/radarr
               tag: 5.3.6.8612
+              pullPolicy: IfNotPresent
             env:
-              # Ref: https://github.com/Radarr/Radarr/issues/7030#issuecomment-1039689518
-              # Ref: https://github.com/dotnet/runtime/issues/9336
               COMPlus_EnableDiagnostics: "0"
               PUSHOVER_DEBUG: "false"
               RADARR__AUTHENTICATION_METHOD: External
@@ -50,21 +59,16 @@ spec:
             envFrom:
               - secretRef:
                   name: *app
-            # probes:
-            #   liveness: &probes
-            #     enabled: true
-            #     custom: true
-            #     spec:
-            #       httpGet:
-            #         path: /ping
-            #         port: *port
-            #       initialDelaySeconds: 0
-            #       periodSeconds: 10
-            #       timeoutSeconds: 1
-            #       failureThreshold: 3
-            #   readiness: *probes
-            #   startup:
-            #     enabled: false
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
             securityContext:
               allowPrivilegeEscalation: false
               readOnlyRootFilesystem: true
@@ -76,9 +80,11 @@ spec:
             runAsNonRoot: true
             fsGroup: 568
             fsGroupChangePolicy: OnRootMismatch
-            supplementalGroups: [10000]
+            supplementalGroups:
+              - 65539
     service:
-      main:
+      app:
+        controller: *app
         ports:
           http:
             port: *port
@@ -96,12 +102,12 @@ spec:
           - host: &host "{{ .Release.Name }}.${SECRET_DOMAIN}"
             paths:
               - path: /
+                pathType: Prefix
                 service:
-                  name: main
+                  identifier: app
                   port: http
         tls:
-          - hosts:
-              - *host
+          - hosts: [*host]
     persistence:
       config:
         enabled: true
@@ -109,8 +115,8 @@ spec:
       nfs-nas-media:
         enabled: true
         existingClaim: media-nfs-share-pvc
-        mountPath: /data/media
-        readOnly: false
+        globalMounts:
+          - /data/media
     resources:
       requests:
         cpu: 10m
