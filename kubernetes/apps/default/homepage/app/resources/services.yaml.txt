@@ -30,7 +30,7 @@
           password: {{HOMEPAGE_VAR_PROXMOX_PASSWORD}}
     - PiHole:
         href: http://raspberrypi.local/admin/index.php
-        icon: pihole.png
+        icon: pi-hole.png
         description: PiHole
         widget:
           type: pihole
