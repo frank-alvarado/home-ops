@@ -19,6 +19,7 @@
           accountid: "{{HOMEPAGE_VAR_CLOUDFLARED_ACCOUNTID}}"
           tunnelid: "{{HOMEPAGE_VAR_CLOUDFLARED_TUNNELID}}"
           key: "{{HOMEPAGE_VAR_CLOUDFLARED_API_TOKEN}}"
+
     - Proxmox:
         href: frankpro:8086
         icon: proxmox.png
@@ -80,10 +81,10 @@
               url: https://bazarr.${{HOMEPAGE_VAR_DOMAIN}}
               key: "{{HOMEPAGE_VAR_BAZARR_KEY}}"
         - Prowlarr:
-          icon: prowlarr.png
-          href: https://prowlarr.${{HOMEPAGE_VAR_DOMAIN}}
-          description: Indexer Management
-          widget:
-            type: prowlarr
-            url: https://prowlarr.${{HOMEPAGE_VAR_DOMAIN}}
-            key: "{{HOMEPAGE_VAR_PROWLARR_KEY}}"
+            icon: prowlarr.png
+            href: https://prowlarr.${{HOMEPAGE_VAR_DOMAIN}}
+            description: Indexer Management
+            widget:
+              type: prowlarr
+              url: https://prowlarr.${{HOMEPAGE_VAR_DOMAIN}}
+              key: "{{HOMEPAGE_VAR_PROWLARR_KEY}}"
