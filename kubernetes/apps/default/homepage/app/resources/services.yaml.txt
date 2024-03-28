@@ -43,7 +43,7 @@
             description: Movies Management
             widget:
               type: radarr
-              url: https://radarr.frankalv.com
+              url: http://10.96.16.171:80
               key: "{{HOMEPAGE_VAR_RADARR_KEY}}"
               enableQueue: true
         - Sonarr:
@@ -61,5 +61,5 @@
             description: Indexer Management
             widget:
               type: prowlarr
-              url: http://192.168.1.239:9696
+              url: http://10.96.99.5:9696
               key: "{{HOMEPAGE_VAR_PROWLARR_KEY}}"
