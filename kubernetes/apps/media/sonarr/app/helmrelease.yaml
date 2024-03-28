@@ -52,7 +52,7 @@ spec:
               requests:
                 cpu: 247m
               limits:
-                memory: 8Gi
+                memory: 1Gi
             envFrom:
               - secretRef:
                   name: *app
