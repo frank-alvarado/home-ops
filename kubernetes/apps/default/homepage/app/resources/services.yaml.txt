@@ -28,6 +28,14 @@
           url: https://192.168.1.128:8006
           username: "api@pam!homepage"
           password: {{HOMEPAGE_VAR_PROXMOX_PASSWORD}}
+    - PiHole:
+        href: http://raspberrypi.local/admin/index.php
+        icon: pihole.png
+        description: PiHole
+        widget:
+          type: pihole
+          url: http://192.168.1.170
+          key: {{HOMEPAGE_VAR_PIHOLE_KEY}}
 - Media:
         - SABnzbd:
             icon: sabnzbd.png
