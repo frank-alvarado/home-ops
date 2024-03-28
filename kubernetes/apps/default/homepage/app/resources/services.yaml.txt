@@ -57,9 +57,9 @@
               enableQueue: true
         - Prowlarr:
             icon: prowlarr.png
-            href: http://prowlarr:9696
+            href: https://prowlarr.frankalv.com
             description: Indexer Management
             widget:
               type: prowlarr
-              url: https://prowlarr.frankalv.com
+              url: http://prowlarr:9696
               key: "{{HOMEPAGE_VAR_PROWLARR_KEY}}"
