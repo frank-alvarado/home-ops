@@ -30,28 +30,28 @@
               key: {{HOMEPAGE_VAR_OVERSEERR_KEY}}
         - SABnzbd:
             icon: sabnzbd.png
-            href: https://qbit.${HOMEPAGE_VAR_DOMAIN}
+            href: https://sabnzbd.frankalv.com
             description: Usenet download tool
             widget:
               type: sabnzbd
-              url: https://sabnzbd.${HOMEPAGE_VAR_DOMAIN}
-              key: {{HOMEPAGE_VAR_SABNZBD_KEY}}
+              url: https://sabnzbd.frankalv.com
+              key: "{{HOMEPAGE_VAR_SABNZBD_KEY}}"
         - Radarr:
             icon: radarr.png
-            href: https://radarr.${HOMEPAGE_VAR_DOMAIN}
+            href: https://radarr.frankalv.com
             description: Movies Management
             widget:
               type: radarr
-              url: https://radarr.${HOMEPAGE_VAR_DOMAIN}
-              key: {{HOMEPAGE_VAR_RADARR_KEY}}
+              url: https://radarr.frankalv.com
+              key: "{{HOMEPAGE_VAR_RADARR_KEY}}"
         - Sonarr:
             icon: sonarr.png
-            href: https://sonarr.${HOMEPAGE_VAR_DOMAIN}
+            href: https://sonarr.frankalv.com
             description: TV Shows Management
             widget:
               type: sonarr
               url: https://sonarr.${HOMEPAGE_VAR_DOMAIN}
-              key: {{HOMEPAGE_VAR_SONARR_KEY}}
+              key: "{{HOMEPAGE_VAR_SONARR_KEY}}"
         - Lidarr:
             icon: lidarr.png
             href: https://lidarr.${HOMEPAGE_VAR_DOMAIN}
