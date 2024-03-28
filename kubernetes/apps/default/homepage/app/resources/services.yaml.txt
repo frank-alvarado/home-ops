@@ -43,14 +43,14 @@
             description: TV Shows Management
             widget:
               type: sonarr
-              url: https://sonarr.${{HOMEPAGE_VAR_DOMAIN}}
+              url: https://sonarr.frankalv.com
               key: "{{HOMEPAGE_VAR_SONARR_KEY}}"
               enableQueue: true
         - Prowlarr:
             icon: prowlarr.png
-            href: https://prowlarr.${{HOMEPAGE_VAR_DOMAIN}}
+            href: https://prowlarr.frankalv.com
             description: Indexer Management
             widget:
               type: prowlarr
-              url: https://prowlarr.${{HOMEPAGE_VAR_DOMAIN}}
+              url: https://prowlarr.frankalv.com
               key: "{{HOMEPAGE_VAR_PROWLARR_KEY}}"
