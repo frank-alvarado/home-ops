@@ -9,8 +9,8 @@ resources:
   - ./media-nfs-share.yaml
   - ./sabnzbd/ks.yaml
   # - ./prowlarr/ks.yaml
-  - ./radarr/ks.yaml
-  - ./sonarr/ks.yaml
+  # - ./radarr/ks.yaml
+  # - ./sonarr/ks.yaml
 
   # - ./overseerr/ks.yaml
   # - ./bazarr/ks.yaml

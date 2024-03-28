@@ -34,16 +34,6 @@ spec:
       nameOverride: *app
     controllers:
       sonarr:
-        # type: deployment
-        # initContainers:
-        #   init:
-        #     image:
-        #       repository: ghcr.io/onedr0p/postgres-init
-        #       tag: 16.2
-        #       pullPolicy: IfNotPresent
-        #     envFrom: &envFrom
-        #       - secretRef:
-        #           name: postgres-sonarr
         containers:
           app:
             image:
