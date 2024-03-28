@@ -53,6 +53,7 @@
               type: sonarr
               url: https://sonarr.${{HOMEPAGE_VAR_DOMAIN}}
               key: "{{HOMEPAGE_VAR_SONARR_KEY}}"
+              enableQueue: true
         - Lidarr:
             icon: lidarr.png
             href: https://lidarr.${{HOMEPAGE_VAR_DOMAIN}}
