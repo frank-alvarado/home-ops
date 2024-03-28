@@ -6,7 +6,7 @@ metadata:
   name: &app sonarr
   namespace: media
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: app-template
@@ -37,42 +37,41 @@ spec:
             image:
               repository: ghcr.io/onedr0p/sonarr
               tag: 4.0.2.1183
-              pullPolicy: IfNotPresent
             env:
+              TZ: "${TIMEZONE}"
+              SONARR__PORT: &port 80
               COMPlus_EnableDiagnostics: "0"
               PUSHOVER_DEBUG: "false"
               SONARR__AUTHENTICATION_METHOD: External
               SONARR__AUTHENTICATION_REQUIRED: DisabledForLocalAddresses
               SONARR__INSTANCE_NAME: Sonarr
-              SONARR__PORT: &port 80
               SONARR__APPLICATION_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
               SONARR__LOG_LEVEL: info
               SONARR__THEME: dark
-              TZ: "${TIMEZONE}"
+            resources:
+              requests:
+                cpu: 247m
+              limits:
+                memory: 8Gi
             envFrom:
               - secretRef:
                   name: *app
             probes:
-              liveness:
+              liveness: &probes
                 enabled: true
-              readiness:
-                enabled: true
+                custom: true
               startup:
                 enabled: false
                 spec:
                   failureThreshold: 30
                   periodSeconds: 5
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
         pod:
           securityContext:
             runAsUser: 568
             runAsGroup: 568
-            runAsNonRoot: true
+            # runAsNonRoot: true
             fsGroup: 568
-            fsGroupChangePolicy: OnRootMismatch
+            fsGroupChangePolicy: "OnRootMismatch"
             supplementalGroups:
               - 65539
     service:
@@ -82,7 +81,7 @@ spec:
           http:
             port: *port
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         annotations:
