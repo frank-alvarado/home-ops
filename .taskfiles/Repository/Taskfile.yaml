@@ -37,3 +37,11 @@ tasks:
       - git reset --hard HEAD
       - git clean -f -d
       - git pull origin main
+
+  update-from-remote:
+      desc: Update from remote template repository
+      cmds:
+        - git remote get-url template >/dev/null 2>&1 || git remote add template https://github.com/onedr0p/cluster-template.git
+        - git fetch --all
+        - git cherry-pick --no-commit --allow-empty $(cat latest-template.sha)..template/main
+        - git ls-remote template HEAD | awk '{ print $1}' > latest-template.sha
