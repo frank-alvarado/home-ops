@@ -8,7 +8,7 @@ resources:
   # Flux-Kustomizations
   - ./media-nfs-share.yaml
   - ./sabnzbd/ks.yaml
-  # - ./prowlarr/ks.yaml
+  - ./prowlarr/ks.yaml
   - ./radarr/ks.yaml
   - ./sonarr/ks.yaml
 
