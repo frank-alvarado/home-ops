@@ -4,6 +4,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: &app radarr
+  namespace: media
 spec:
   interval: 30m
   chart:
@@ -14,13 +15,15 @@ spec:
         kind: HelmRepository
         name: bjw-s
         namespace: flux-system
+  maxHistory: 2
   install:
+    createNamespace: true
     remediation:
-      retries: 3
+      retries: 5
   upgrade:
     cleanupOnFail: true
     remediation:
-      retries: 3
+      retries: 5
   uninstall:
     keepHistory: false
   dependsOn:
@@ -34,8 +37,8 @@ spec:
             image:
               repository: ghcr.io/onedr0p/radarr
               tag: 5.3.6.8612
-              pullPolicy: IfNotPresent
             env:
+              TZ: ${TIMEZONE}
               COMPlus_EnableDiagnostics: "0"
               PUSHOVER_DEBUG: "false"
               RADARR__AUTHENTICATION_METHOD: External
@@ -45,31 +48,30 @@ spec:
               RADARR__APPLICATION_URL: "https://{{ .Release.Name }}.${SECRET_DOMAIN}"
               RADARR__LOG_LEVEL: info
               RADARR__THEME: dark
-              TZ: ${TIMEZONE}
+            resources:
+              requests:
+                cpu: 247m
+              limits:
+                memory: 8Gi
             envFrom:
               - secretRef:
                   name: *app
             probes:
-              liveness:
+              liveness: &probes
                 enabled: true
-              readiness:
-                enabled: true
+                custom: true
               startup:
-                enabled: true
+                enabled: false
                 spec:
                   failureThreshold: 30
                   periodSeconds: 5
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
         pod:
           securityContext:
             runAsUser: 568
             runAsGroup: 568
-            runAsNonRoot: true
+            # runAsNonRoot: true
             fsGroup: 568
-            fsGroupChangePolicy: OnRootMismatch
+            fsGroupChangePolicy: "OnRootMismatch"
             supplementalGroups:
               - 65539
     service:
@@ -79,7 +81,7 @@ spec:
           http:
             port: *port
     ingress:
-      main:
+      app:
         enabled: true
         className: internal
         annotations:
@@ -106,7 +108,8 @@ spec:
         enabled: true
         existingClaim: media-nfs-share-pvc
         globalMounts:
-          - /data/media
+          - path: /data/media
+            readOnly: false
     resources:
       requests:
         cpu: 10m
