@@ -117,8 +117,9 @@ spec:
         existingClaim: media-nfs-share-pvc
         globalMounts:
           - /data/media
-    requests:
-      cpu: 10m
-      memory: 250Mi
-    limits:
-      memory: 2000Mi
+    resources:
+      requests:
+        cpu: 10m
+        memory: 250Mi
+      limits:
+        memory: 2000Mi
