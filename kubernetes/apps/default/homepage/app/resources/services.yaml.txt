@@ -19,16 +19,6 @@
           accountid: "{{HOMEPAGE_VAR_CLOUDFLARED_ACCOUNTID}}"
           tunnelid: "{{HOMEPAGE_VAR_CLOUDFLARED_TUNNELID}}"
           key: "{{HOMEPAGE_VAR_CLOUDFLARED_API_TOKEN}}"
-
-    - Proxmox:
-        href: frankpro:8086
-        icon: proxmox.png
-        description: Proxmox
-        widget:
-          type: proxmox
-          url: https://frankpro:8006
-          username: "api@pam!homepage"
-          password: "{{HOMEPAGE_VAR_PROXMOX_PASSWORD}}"
 - Media:
         - SABnzbd:
             icon: sabnzbd.png
