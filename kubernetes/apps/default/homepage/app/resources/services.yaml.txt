@@ -29,14 +29,13 @@
               url: https://overseerr.${HOMEPAGE_VAR_DOMAIN}
               key: {{HOMEPAGE_VAR_OVERSEERR_KEY}}
         - SABnzbd:
-            icon: qbittorrent.png
+            icon: sabnzbd.png
             href: https://qbit.${HOMEPAGE_VAR_DOMAIN}
-            description: Torrent Management
+            description: Usenet download tool
             widget:
-              type: qbittorrent
+              type: sabnzbd
               url: https://sabnzbd.${HOMEPAGE_VAR_DOMAIN}
-              username: {{HOMEPAGE_VAR_QBITTORRENT_USERNAME}}
-              password: {{HOMEPAGE_VAR_QBITTORRENT_PASSWORD}}
+              key: {{HOMEPAGE_VAR_SABNZBD_KEY}}
         - Radarr:
             icon: radarr.png
             href: https://radarr.${HOMEPAGE_VAR_DOMAIN}
@@ -69,3 +68,11 @@
               type: bazarr
               url: https://bazarr.${HOMEPAGE_VAR_DOMAIN}
               key: {{HOMEPAGE_VAR_BAZARR_KEY}}
+        - Prowlarr:
+          icon: prowlarr.png
+          href: https://prowlarr.${HOMEPAGE_VAR_DOMAIN}
+          description: Indexer Management
+          widget:
+            type: prowlarr
+            url: https://prowlarr.${HOMEPAGE_VAR_DOMAIN}
+            key: {{HOMEPAGE_VAR_PROWLARR_KEY}}
