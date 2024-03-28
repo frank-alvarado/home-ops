@@ -30,14 +30,14 @@
           username: "api@pam!homepage"
           password: "{{HOMEPAGE_VAR_PROXMOX_PASSWORD}}"
 - Media:
-        - Overseerr:
-            icon: overseerr.png
-            href: https://overseerr.${{HOMEPAGE_VAR_DOMAIN}}
-            description: Media Requests
-            widget:
-              type: overseerr
-              url: https://overseerr.${{HOMEPAGE_VAR_DOMAIN}}
-              key: "{{HOMEPAGE_VAR_OVERSEERR_KEY}}"
+        # - Overseerr:
+        #     icon: overseerr.png
+        #     href: https://overseerr.${{HOMEPAGE_VAR_DOMAIN}}
+        #     description: Media Requests
+        #     widget:
+        #       type: overseerr
+        #       url: https://overseerr.${{HOMEPAGE_VAR_DOMAIN}}
+        #       key: "{{HOMEPAGE_VAR_OVERSEERR_KEY}}"
         - SABnzbd:
             icon: sabnzbd.png
             href: https://sabnzbd.frankalv.com
@@ -64,22 +64,22 @@
               url: https://sonarr.${{HOMEPAGE_VAR_DOMAIN}}
               key: "{{HOMEPAGE_VAR_SONARR_KEY}}"
               enableQueue: true
-        - Lidarr:
-            icon: lidarr.png
-            href: https://lidarr.${{HOMEPAGE_VAR_DOMAIN}}
-            description: Musics Management
-            widget:
-              type: lidarr
-              url: https://lidarr.${{HOMEPAGE_VAR_DOMAIN}}
-              key: "{{HOMEPAGE_VAR_LIDARR_KEY}}"
-        - Bazarr:
-            icon: bazarr.png
-            href: https://bazarr.${{HOMEPAGE_VAR_DOMAIN}}
-            description: Subtitles Management
-            widget:
-              type: bazarr
-              url: https://bazarr.${{HOMEPAGE_VAR_DOMAIN}}
-              key: "{{HOMEPAGE_VAR_BAZARR_KEY}}"
+        # - Lidarr:
+        #     icon: lidarr.png
+        #     href: https://lidarr.${{HOMEPAGE_VAR_DOMAIN}}
+        #     description: Musics Management
+        #     widget:
+        #       type: lidarr
+        #       url: https://lidarr.${{HOMEPAGE_VAR_DOMAIN}}
+        #       key: "{{HOMEPAGE_VAR_LIDARR_KEY}}"
+        # - Bazarr:
+        #     icon: bazarr.png
+        #     href: https://bazarr.${{HOMEPAGE_VAR_DOMAIN}}
+        #     description: Subtitles Management
+        #     widget:
+        #       type: bazarr
+        #       url: https://bazarr.${{HOMEPAGE_VAR_DOMAIN}}
+        #       key: "{{HOMEPAGE_VAR_BAZARR_KEY}}"
         - Prowlarr:
             icon: prowlarr.png
             href: https://prowlarr.${{HOMEPAGE_VAR_DOMAIN}}
