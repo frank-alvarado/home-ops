@@ -34,7 +34,7 @@ spec:
       nameOverride: *app
     controllers:
       sonarr:
-        type: deployment
+        # type: deployment
         # initContainers:
         #   init:
         #     image:
