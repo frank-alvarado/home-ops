@@ -27,7 +27,7 @@
         widget:
           type: proxmox
           url: https://frankpro:8006
-          username: api@pam!homepage
+          username: "api@pam!homepage"
           password: "{{HOMEPAGE_VAR_PROXMOX_PASSWORD}}"
 - Media:
         - Overseerr:
