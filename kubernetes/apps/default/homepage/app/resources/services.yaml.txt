@@ -57,7 +57,7 @@
               enableQueue: true
         - Prowlarr:
             icon: prowlarr.png
-            href: https://prowlarr.frankalv.com
+            href: http://prowlarr:9696
             description: Indexer Management
             widget:
               type: prowlarr
