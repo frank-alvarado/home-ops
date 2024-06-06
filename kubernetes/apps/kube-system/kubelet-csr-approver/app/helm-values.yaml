@@ -1,0 +1,3 @@
+---
+providerRegex: ^(frankpro-1|frankpro-2|l1-1|l2-1|l2-2)$
+bypassDnsResolution: true
